@@ -7,6 +7,7 @@ module
 
 prelude
 public import Init.Data.Range.Polymorphic.UpwardEnumerable
+public import Init.Data.Range.Polymorphic.DownwardEnumerable
 
 set_option doc.verso true
 set_option linter.missingDocs true

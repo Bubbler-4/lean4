@@ -24,6 +24,10 @@ instance : UpwardEnumerable Nat where
   succ? n := some (n + 1)
   succMany? k n := some (n + k)
 
+instance : DownwardEnumerable Nat where
+  pred? n := if n = 0 then none else some (n - 1)
+  predMany? k n := if k ≤ n then some (n - k) else none
+
 instance : Least? Nat where
   least? := some 0
 

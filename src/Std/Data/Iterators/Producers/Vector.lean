@@ -53,3 +53,8 @@ The monadic version of this iterator is
 @[always_inline, inline]
 def Vector.iter {α : Type w} (xs : Vector α n) :=
   (xs.toArray.iter : Iter α)
+
+/-- Returns a finite iterator that yields the elements of the vector in reverse order. -/
+@[always_inline, inline]
+def Vector.iterRev {α : Type w} (xs : Vector α n) :=
+  (xs.toArray.iterRev : Iter α)

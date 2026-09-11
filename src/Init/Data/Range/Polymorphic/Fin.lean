@@ -25,6 +25,10 @@ instance : UpwardEnumerable (Fin n) where
   succ? i := i.addNat? 1
   succMany? m i := i.addNat? m
 
+instance : DownwardEnumerable (Fin n) where
+  pred? i := if h : 0 < i then some ⟨i - 1, by omega⟩ else none
+  predMany? k i := if h : k ≤ i then some ⟨i - k, by omega⟩ else none
+
 @[simp, grind =]
 theorem pRangeSucc?_eq : PRange.succ? (α := Fin n) = (·.addNat? 1) := rfl
 
@@ -46,6 +50,9 @@ instance : LawfulUpwardEnumerableLE (Fin n) where
 instance : Least? (Fin 0) where
   least? := none
 
+instance : Greatest? (Fin 0) where
+  greatest? := none
+
 instance : LawfulUpwardEnumerableLeast? (Fin 0) where
   least?_le a := False.elim (Nat.not_lt_zero _ a.isLt)
 
@@ -54,6 +61,9 @@ theorem least?_eq_of_zero : Least?.least? (α := Fin 0) = none := rfl
 
 instance [NeZero n] : Least? (Fin n) where
   least? := some 0
+
+instance [NeZero n] : Greatest? (Fin n) where
+  greatest? := some ⟨n - 1, by omega⟩
 
 instance [NeZero n] : LawfulUpwardEnumerableLeast? (Fin n) where
   least?_le a := ⟨0, rfl, (LawfulUpwardEnumerableLE.le_iff 0 a).1 (Fin.zero_le _)⟩

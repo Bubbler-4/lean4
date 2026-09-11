@@ -49,3 +49,8 @@ The monadic version of this iterator is `Array.iterM`.
 def Array.iter {α : Type w} (l : Array α) :
     Iter (α := ArrayIterator α) α :=
   ((l.iterM Id).toIter : Iter α)
+
+/-- Returns a finite iterator that yields the elements of the array in reverse order. -/
+@[cbv_opaque, always_inline, inline]
+def Array.iterRev {α : Type w} (xs : Array α) : Iter α :=
+  xs.reverse.iter

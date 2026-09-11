@@ -17,6 +17,10 @@ instance : UpwardEnumerable Int where
   succ? x := some (x + 1)
   succMany? n x := some (x + n)
 
+instance : DownwardEnumerable Int where
+  pred? x := some (x - 1)
+  predMany? n x := some (x - n)
+
 instance : LawfulUpwardEnumerable Int where
   ne_of_lt := by
     simp only [UpwardEnumerable.LT, UpwardEnumerable.succMany?, Option.some.injEq]
